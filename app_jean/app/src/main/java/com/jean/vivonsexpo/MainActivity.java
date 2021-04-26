@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Appel de la function authentification
-                Log.d("Test","Je viens de cliquer sur le bouton valider");
                 try {
                     authentification();
                 }catch (IOException e) {
@@ -66,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         Request request = new Request.Builder()
                 .url("http://192.168.0.55/vivonsexpo/authentification.php")
-                .post(formBody)
+//                .post(formBody)
                 .build();
 
         Call call = client.newCall(request);
+        Log.d("Test",request.toString());
         call.enqueue(new Callback() {
             public  void onResponse(Call call, Response response) throws IOException {
                 responseStr = response.body().string();
