@@ -59,13 +59,14 @@ public class MainActivity extends AppCompatActivity {
     public void authentification() throws IOException {
         final EditText textLogin = findViewById(R.id.editTextLogin);
         final EditText textMdp = findViewById(R.id.editTextMdp);
+//        Log.d("Test","Login : " + textLogin.getText().toString() + " mdp : " + textMdp.getText().toString());
         RequestBody formBody = new FormBody.Builder()
                 .add("login", textLogin.getText().toString())
-                .add("mdp",  textMdp.getText().toString())
+                .add("mdp", textMdp.getText().toString())
                 .build();
         Request request = new Request.Builder()
                 .url("http://192.168.0.55/vivonsexpo/authentification.php")
-//                .post(formBody)
+                .post(formBody)
                 .build();
 
         Call call = client.newCall(request);
@@ -79,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject user = new JSONObject(responseStr);
                         Log.d("Test",user.getString("login") + " est  connecté");
                         Log.d("Test",user.getString("statut"));
-                        if(user.getString("statut").compareTo("staff")!=0) {
+                        if(user.getString("statut").compareTo("staff") == 0) {
                             Intent intent = new Intent(MainActivity.this, MenuStaff.class);
                             intent.putExtra("user", user.toString());
                             startActivity(intent);
