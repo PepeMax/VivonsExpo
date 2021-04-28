@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -61,7 +62,7 @@ public class GestionUnivers extends AppCompatActivity {
         ArrayList<String> arrayListNomUnivers = new ArrayList<>();
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.55/vivonsexpo/getLesUnivers.php")
+                .url("http://"+Param.ip+"/vivonsexpo/getLesUnivers.php")
                 .build();
 
         Call call = client.newCall(request);
@@ -85,24 +86,24 @@ public class GestionUnivers extends AppCompatActivity {
                 Log.d("Test", arrayListNomUnivers.toString());
                 ListView listViewUnivers = findViewById(R.id.listViewUnivers);
 
-                ArrayAdapter<String> arrayAdapterClasses = new ArrayAdapter<String>(GestionUnivers.this, android.R.layout.simple_list_item_1, arrayListNomUnivers);
+                ArrayAdapter<String> arrayAdapterUnivers = new ArrayAdapter<String>(GestionUnivers.this, android.R.layout.simple_list_item_1, arrayListNomUnivers);
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listViewUnivers.setAdapter(arrayAdapterClasses);
+                        listViewUnivers.setAdapter(arrayAdapterUnivers);
                     }
                 });
-//                listViewClasses.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                        Object uneClasse = adapterView.getItemAtPosition(i);
-//
-//                        Intent intent = new Intent(ClassesActivity.this,uneClasseActivity.class);
-//                        intent.putExtra("nomClasse",uneClasse.toString());
-//                        startActivity(intent);
-//                    }
-//                });
+                listViewUnivers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Object unUnivers = adapterView.getItemAtPosition(i);
+
+                        Intent intent = new Intent(GestionUnivers.this,GestionSecteur.class);
+                        intent.putExtra("codeU",unUnivers.toString());
+                        startActivity(intent);
+                    }
+                });
 
             }
 

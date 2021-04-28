@@ -57,7 +57,7 @@ public class AjoutUniver extends AppCompatActivity {
         ArrayList<String> arrayListNumHall = new ArrayList<>();
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.55/vivonsexpo/getLesHalls.php")
+                .url("http://"+Param.ip+"/vivonsexpo/getLesHalls.php")
                 .build();
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
@@ -68,7 +68,6 @@ public class AjoutUniver extends AppCompatActivity {
                 JSONArray jsonArrayHall = null;
                 try {
                     jsonArrayHall = new JSONArray(responseStr);
-
                     for (int i = 0; i < jsonArrayHall.length(); i++) {
                         JSONObject jsonHall = null;
                         jsonHall = jsonArrayHall.getJSONObject(i);
@@ -127,7 +126,7 @@ public class AjoutUniver extends AppCompatActivity {
                     finish();
                 } else {
 //                    Toast.makeText(MainActivity.this, "message !", Toast.LENGTH_SHORT).show();
-                    Log.d("Test","Login ou mot de  passe non valide !");
+                    Log.d("Test","Impossible de faire l'ajout de l'univers !");
                 }
             }
 

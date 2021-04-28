@@ -1,5 +1,6 @@
 package com.jean.vivonsexpo;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 .add("mdp", textMdp.getText().toString())
                 .build();
         Request request = new Request.Builder()
-                .url("http://192.168.0.55/vivonsexpo/authentification.php")
+                .url("http://"+Param.ip+"/vivonsexpo/authentification.php")
                 .post(formBody)
                 .build();
 
