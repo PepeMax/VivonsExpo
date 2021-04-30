@@ -41,11 +41,11 @@ public class GestionSecteur extends AppCompatActivity {
         int firstSpace = stringU.indexOf(" ");
         codeU = stringU.substring(0,firstSpace);
         stringU = stringU.substring(firstSpace + 1);
-        Log.d("Test", "codeU = " + codeU);
+//        Log.d("Test", "codeU = " + codeU);
 
         int secondSpace = stringU.indexOf(" ");
         libelleU = stringU.substring(secondSpace + 1);
-        Log.d("Test","stringU = " + libelleU);
+//        Log.d("Test","stringU = " + libelleU);
 
         final TextView textSecteur = (TextView) findViewById(R.id.TextSecteur);
         String text = textSecteur.getText() + libelleU + " :";
@@ -62,16 +62,24 @@ public class GestionSecteur extends AppCompatActivity {
             }
         });
 
-        recupUnivers(codeU,libelleU);
+        final Button buttonQuitterGestionSecteur = findViewById(R.id.buttonQuitterGestionSecteur);
+        buttonQuitterGestionSecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        recupSecteurs(codeU,libelleU);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        recupUnivers(codeU,libelleU);
+        recupSecteurs(codeU,libelleU);
     }
 
-    private void recupUnivers(String codeU, String libelleU){
+    private void recupSecteurs(String codeU, String libelleU){
         OkHttpClient client = new OkHttpClient();
         ArrayList<String> arrayListNomSecteurs = new ArrayList<>();
 
@@ -120,9 +128,10 @@ public class GestionSecteur extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Object unUnivers = adapterView.getItemAtPosition(i);
 
-                        Intent intent = new Intent(GestionSecteur.this,GestionSecteur.class);
+                        Intent intent = new Intent(GestionSecteur.this,ModifUnSecteur.class);
                         intent.putExtra("codeU",codeU);
                         intent.putExtra("libelleU",libelleU);
+                        intent.putExtra("stringS",unUnivers.toString());
                         startActivity(intent);
                     }
                 });

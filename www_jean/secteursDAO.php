@@ -27,4 +27,31 @@ class secteursDAO{
 		}
 		return $reponse;
     }
+
+	public static function updateSecteur($codeS,$libelleS){
+		try{
+            $sql = "update secteur set libelles = :libelles where codes = :codes;" ;
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+            $requetePrepa->bindParam("codes",$codeS);
+            $requetePrepa->bindParam("libelles",$libelleS);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->rowCount();
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
+
+	public static function deleteSecteur($codeS){
+		try{
+            $sql = "delete from secteur where codes = :codes;" ;
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+            $requetePrepa->bindParam("codes",$codeS);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->rowCount();
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
 }

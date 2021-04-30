@@ -45,6 +45,14 @@ public class AjoutUniver extends AppCompatActivity {
             }
         });
 
+        final Button buttonQuitterAjoutUniver = findViewById(R.id.buttonQuitterAjoutUniver);
+        buttonQuitterAjoutUniver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         try {
             selectHall();
         } catch (IOException e) {
@@ -112,7 +120,7 @@ public class AjoutUniver extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.55/vivonsexpo/insertUniver.php")
+                .url("http://"+Param.ip+"/vivonsexpo/insertUniver.php")
                 .post(formBody)
                 .build();
 

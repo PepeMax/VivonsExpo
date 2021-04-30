@@ -39,6 +39,15 @@ public class GestionUnivers extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        final Button buttonQuitterUniver = findViewById(R.id.buttonQuitterUniver);
+        buttonQuitterUniver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         try {
             listeUnivers();
         } catch (IOException e) {

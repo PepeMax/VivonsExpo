@@ -41,8 +41,15 @@ public class AjoutSecteur extends AppCompatActivity {
         buttonAjoutSecteur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Test","Je viens de cliquer sur le bouton pour inserer un secteur");
                 insert();
+            }
+        });
+
+        final Button buttonQuiterAjoutSecteur = findViewById(R.id.buttonQuitterAjoutSecteur);
+        buttonQuiterAjoutSecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -60,7 +67,7 @@ public class AjoutSecteur extends AppCompatActivity {
                 .build();
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.55/vivonsexpo/insertSecteur.php")
+                .url("http://"+Param.ip+"/vivonsexpo/insertSecteur.php")
                 .post(formBody)
                 .build();
 
