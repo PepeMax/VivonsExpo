@@ -72,7 +72,7 @@ public class Staff_Create_Account extends AppCompatActivity {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String responseStr = response.body().string();
-//                Log.d("Test",responseStr);
+                //Log.d("Test",responseStr);
                 JSONArray jsonArraySalon = null;
                 try {
                     jsonArraySalon = new JSONArray(responseStr);
@@ -151,12 +151,13 @@ public class Staff_Create_Account extends AppCompatActivity {
 
             public void onResponse(Call call, Response response) throws IOException {
                 responseStr = response.body().string();
+                Log.d("DEBUG", responseStr);
                 if (responseStr.compareTo("OK") != 0) {
                     Intent intent = new Intent(Staff_Create_Account.this, Staff_Home.class);
                            intent.putExtra("login", textLogin.getText().toString());
                            intent.putExtra("mdp", textMdp.getText().toString());
                            startActivity(intent);
-
                 }
             }
-        });}}
+        });
+    }}

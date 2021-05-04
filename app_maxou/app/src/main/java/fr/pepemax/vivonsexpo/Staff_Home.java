@@ -23,16 +23,16 @@ public class Staff_Home extends AppCompatActivity {
     String responseStr ;
     OkHttpClient client = new OkHttpClient();
 
-    final EditText textLogin = findViewById(R.id.editTextLogin);
-    final EditText textMdp = findViewById(R.id.editTextMdp);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff__home);
 
+        final EditText textLogin = findViewById(R.id.editTextLogin);
+        final EditText textMdp = findViewById(R.id.editTextMdp);
+
         String login = getIntent().getStringExtra("login");
-        String mdp = getIntent().getStringExtra("login");
+        String mdp = getIntent().getStringExtra("mdp");
 
         if (login == null && mdp == null) {
             login = "";
@@ -67,6 +67,9 @@ public class Staff_Home extends AppCompatActivity {
 
 
     public void authentification() throws IOException {
+        final EditText textLogin = findViewById(R.id.editTextLogin);
+        final EditText textMdp = findViewById(R.id.editTextMdp);
+
         RequestBody formBody = new FormBody.Builder()
                 .add("login", textLogin.getText().toString())
                 .add("mdp",  textMdp.getText().toString())
@@ -84,6 +87,7 @@ public class Staff_Home extends AppCompatActivity {
         call.enqueue(new Callback() {
             public  void onResponse(Call call, Response response) throws IOException {
                 responseStr = response.body().string();
+                Log.d("test", responseStr);
 
 
                 if (responseStr.compareTo("false")!=0){
@@ -100,10 +104,11 @@ public class Staff_Home extends AppCompatActivity {
 //                            intent.putExtra("etudiant", etudiant.toString());
 //                            startActivity(intent);
                         }
-                        else {
+                        else if (user.getString("statut").compareTo("exposant")==0){
                             Log.d("Test", "Exposant");
-//                            Intent intent = new Intent(MainActivity.this, MenuProfActivity.class);
-//                            startActivity(intent);
+                            Intent intent = new Intent(Staff_Home.this, Consult_Stand.class);
+                            intent.putExtra("login", textLogin.getText().toString());
+                            startActivity(intent);
                         }
                     }
                     catch(JSONException e){
