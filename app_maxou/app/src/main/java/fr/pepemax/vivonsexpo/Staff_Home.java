@@ -1,6 +1,7 @@
 package fr.pepemax.vivonsexpo;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,16 +19,30 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class Staff_Home extends AppCompatActivity {
     String responseStr ;
     OkHttpClient client = new OkHttpClient();
+
+    final EditText textLogin = findViewById(R.id.editTextLogin);
+    final EditText textMdp = findViewById(R.id.editTextMdp);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_staff__home);
 
-        final Button buttonValiderAuthentification = (Button)findViewById(R.id.buttonConnexion);
+        String login = getIntent().getStringExtra("login");
+        String mdp = getIntent().getStringExtra("login");
+
+        if (login == null && mdp == null) {
+            login = "";
+            mdp = "";
+        }
+
+        textLogin.setText(login);
+        textMdp.setText(mdp);
+
+        final Button buttonValiderAuthentification = (Button) findViewById(R.id.buttonConnexion);
         buttonValiderAuthentification.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,31 +54,47 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        final Button buttonCreateAccount = (Button)findViewById(R.id.buttonCreateAccount);
+        buttonCreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Staff_Home.this, Staff_Create_Account.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
     public void authentification() throws IOException {
-        final EditText textLogin = findViewById(R.id.editTextLogin);
-        final EditText textMdp = findViewById(R.id.editTextMdp);
         RequestBody formBody = new FormBody.Builder()
                 .add("login", textLogin.getText().toString())
                 .add("mdp",  textMdp.getText().toString())
                 .build();
+
         Request request = new Request.Builder()
-                .url("http://192.168.43.222/Etudiants2021/authentification.php")
+                .url(params.URL + "authentification.php")
                 .post(formBody)
                 .build();
 
+        Log.d("Test", textLogin.getText().toString() + " " + textMdp.getText().toString() );
+
         Call call = client.newCall(request);
+
         call.enqueue(new Callback() {
             public  void onResponse(Call call, Response response) throws IOException {
                 responseStr = response.body().string();
-                if (responseStr.compareTo("false")!=0){
-                    try {
-                        JSONObject etudiant = new JSONObject(responseStr);
-                        Log.d("Test",etudiant.getString("nomEtudiant") + " est  connecté");
 
-                        if(etudiant.getString("statut").compareTo("")!=0) {
+
+                if (responseStr.compareTo("false")!=0){
+
+                    Log.d("test", responseStr);
+
+
+                    try {
+                        JSONObject user = new JSONObject(responseStr);
+
+                        if(user.getString("statut").compareTo("staff")==0) {
                             Log.d("Test", "Staff");
 //                            Intent intent = new Intent(MainActivity.this, MenuEtudiantActivity.class);
 //                            intent.putExtra("etudiant", etudiant.toString());
@@ -76,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     catch(JSONException e){
+                        Log.d("TAG", e.toString());
                         // Toast.makeText(MainActivity.this, "Erreur de connexion !!!! !", Toast.LENGTH_SHORT).show();
                     }
                 } else {
