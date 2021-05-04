@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ModifUnSecteur">
+
+    <TextView
+        android:id="@+id/textModifSecteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Modification du secteur"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+
+    <EditText
+        android:id="@+id/editTextCodeModifSecteur"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:hint="Code secteur"
+        android:maxLength="3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textModifSecteur"/>
+
+    <EditText
+        android:id="@+id/editTextLibelleModifSecteur"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Libelle secteur"
+        android:maxLength="25"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCodeModifSecteur"/>
+
+    <Button
+        android:id="@+id/buttonModifSecteur"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Enregistrer"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLibelleModifSecteur"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/buttonSupprimerSecteur"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Supprimer"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/buttonModifSecteur"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <Button
+        android:id="@+id/buttonQuitterModifSecteur"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Annuler"
+        android:textSize="18dp"
+        android:layout_marginTop="5dp"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSupprimerSecteur"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
