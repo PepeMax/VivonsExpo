@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -32,16 +34,21 @@ public class Consult_Stand extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consult__stand);
 
-        login = getIntent().getStringExtra("user").substring(0, getIntent().getStringExtra("user").indexOf("&"));
-        String mdp = getIntent().getStringExtra("user").substring(getIntent().getStringExtra("user").indexOf("&")+1);
-
-        Log.d("DEBUG", login + " "+ mdp);
+        login = getIntent().getStringExtra("login");
 
         try {
             getInfosStand();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        final Button buttonDemandeAutreStand = (Button) findViewById(R.id.buttonDemandeAutreStand);
+        buttonDemandeAutreStand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                demandeAutreStand();
+            }
+        });
 
     }
 
@@ -61,7 +68,7 @@ public class Consult_Stand extends AppCompatActivity {
                 .url(params.URL + "getStand.php")
                 .post(formBody)
                 .build();
-        
+
         Call call = client.newCall(request);
 
         call.enqueue(new Callback() {
@@ -85,17 +92,21 @@ public class Consult_Stand extends AppCompatActivity {
                     catch(JSONException e){
                         Log.d("TAG", e.toString());
                      }
-                } else {
-                    Log.d("Test","Login ou mot de  passe non valide !");
                 }
             }
 
             public void onFailure(Call call, IOException e)
             {
-                Log.d("Test","erreur!!! connexion impossible");
+                Log.d("TAG", e.toString());
             }
 
         });
+    }
+
+    public void demandeAutreStand() {
+        Intent intent = new Intent(Consult_Stand.this, Demande_autre_stand.class);
+        intent.putExtra("login", login);
+        startActivity(intent);
     }
 
 }

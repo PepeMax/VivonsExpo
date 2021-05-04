@@ -110,5 +110,15 @@
         app:layout_constraintStart_toEndOf="@+id/titleNumS"
         />
 
+    <Button
+        android:id="@+id/buttonDemandeAutreStand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Demander un autre stand"
+        app:layout_constraintTop_toBottomOf="@+id/textNumS"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="80dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

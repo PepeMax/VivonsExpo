@@ -107,7 +107,7 @@ public class Staff_Home extends AppCompatActivity {
                         else if (user.getString("statut").compareTo("exposant")==0){
                             Log.d("Test", "Exposant");
                             Intent intent = new Intent(Staff_Home.this, Consult_Stand.class);
-                            intent.putExtra("user", textLogin.getText().toString() + "&" + textMdp.getText().toString());
+                            intent.putExtra("login", textLogin.getText().toString());
                             startActivity(intent);
                         }
                     }

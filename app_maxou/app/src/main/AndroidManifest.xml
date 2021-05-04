@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VivonsExpo">
-        <activity android:name=".Consult_Stand"></activity>
+        <activity android:name=".Demande_autre_stand"></activity>
+        <activity android:name=".Consult_Stand" />
         <activity android:name=".Staff_Create_Account" />
         <activity android:name=".Staff_Home" />
         <activity android:name=".Accueil">
