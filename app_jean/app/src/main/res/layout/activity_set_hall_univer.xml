@@ -4,61 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AjoutUniver">
+    tools:context=".SetHallUniver">
 
     <TextView
-        android:id="@+id/TextUnivers"
+        android:id="@+id/TextHallUnivers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Ajout d'un univer : "
+        android:text="Configuration du hall de l'univer "
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
-
-    <EditText
-        android:id="@+id/editTextCodeUniver"
+    <Spinner
+        android:id="@+id/spinnerHall"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:hint="Code univer"
-        android:maxLength="3"
+        android:hint="Numero de Hall"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextUnivers"/>
-
-    <EditText
-        android:id="@+id/editTextLibelleUniver"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:hint="Libelle univer"
-        android:maxLength="25"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCodeUniver"/>
+        app:layout_constraintTop_toBottomOf="@+id/TextHallUnivers"/>
 
     <Button
-        android:id="@+id/buttonValiderUniver"
+        android:id="@+id/buttonValiderUniverHall"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Enregistrer"
         android:textSize="18dp"
         android:layout_marginTop="5dp"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLibelleUniver"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerHall"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
     <Button
-        android:id="@+id/buttonQuitterAjoutUniver"
+        android:id="@+id/buttonQuitterHallUniver"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Annuler"
         android:textSize="18dp"
         android:layout_marginTop="5dp"
         android:textAllCaps="false"
-        app:layout_constraintTop_toBottomOf="@+id/buttonValiderUniver"
+        app:layout_constraintTop_toBottomOf="@+id/buttonValiderUniverHall"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -48,7 +48,7 @@ public class GestionSecteur extends AppCompatActivity {
 //        Log.d("Test","stringU = " + libelleU);
 
         final TextView textSecteur = (TextView) findViewById(R.id.TextSecteur);
-        String text = textSecteur.getText() + libelleU + " :";
+        String text = textSecteur.getText() + " " + libelleU + " :";
         textSecteur.setText(text);
 
         final Button buttonAjoutSecteur = (Button) findViewById(R.id.buttonAjouterSecteur);

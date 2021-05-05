@@ -22,5 +22,14 @@ public class MenuStaff extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        final Button buttonRepartitionSecteur = findViewById(R.id.buttonRepartitionSecteur);
+        buttonRepartitionSecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuStaff.this,RepartitionsUnivers.class);
+                startActivity(intent);
+            }
+        });
     }
 }
