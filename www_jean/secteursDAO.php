@@ -54,4 +54,20 @@ class secteursDAO{
 		}
 		return $reponse;
 	}
+
+	public static function nombreExposantSecteursUnUnivers($codeU){
+		try{
+			$sql = "select S.codes,S.libelles, count(*) as nbeExposant from SECTEUR S
+					join EXPOSANT E on S.CODES = E.CODES
+					where s.codeu = :codeU
+					group by s.codes;";
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+            $requetePrepa->bindParam("codeU",$codeU);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
 }

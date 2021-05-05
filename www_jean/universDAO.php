@@ -38,4 +38,33 @@ class universDAO{
 		}
 		return $reponse;
     }
+
+	public static function nombreExposantUnivers(){
+		try{
+			$sql = "select UNIVERS.codeu,UNIVERS.libelleu, count(*) as nbeExposant from UNIVERS
+					join SECTEUR S on UNIVERS.CODEU = S.CODEU
+					join EXPOSANT E on S.CODES = E.CODES
+					group by UNIVERS.CODEU;";
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
+
+	public static function updateHallUnivers($codeU,$numH){
+		try{
+			$sql = "update univers set numh = :numH where codeu = :codeU";
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+			$requetePrepa->bindParam("codeU",$codeU);
+            $requetePrepa->bindParam("numH",$numH);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->rowCount();
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
 }
