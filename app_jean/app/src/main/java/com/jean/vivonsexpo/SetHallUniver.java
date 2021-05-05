@@ -72,7 +72,6 @@ public class SetHallUniver extends AppCompatActivity {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String responseStr = response.body().string();
-                Log.d("Test",responseStr);
                 JSONArray jsonArrayHall = null;
                 try {
                     jsonArrayHall = new JSONArray(responseStr);
@@ -84,7 +83,6 @@ public class SetHallUniver extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.d("Test", arrayListNumHall.toString());
                 Spinner spinnerUnivers = findViewById(R.id.spinnerHall);
 
                 ArrayAdapter<String> arrayAdapterHalls = new ArrayAdapter<String>(SetHallUniver.this, android.R.layout.simple_spinner_item, arrayListNumHall);
@@ -106,9 +104,8 @@ public class SetHallUniver extends AppCompatActivity {
 
     private void updateHall(){
         OkHttpClient client = new OkHttpClient();
-        ArrayList<String> arrayListNumHall = new ArrayList<>();
-        final Spinner spinnerHall = findViewById(R.id.spinnerHall);
 
+        final Spinner spinnerHall = findViewById(R.id.spinnerHall);
         RequestBody formBody = new FormBody.Builder()
                 .add("codeU",codeU)
                 .add("numH",spinnerHall.getSelectedItem().toString())
@@ -116,6 +113,7 @@ public class SetHallUniver extends AppCompatActivity {
 
         Request request = new Request.Builder()
                 .url("http://"+Param.ip+"/vivonsexpo/updateHallUnivers.php")
+                .post(formBody)
                 .build();
 
         Call call = client.newCall(request);
