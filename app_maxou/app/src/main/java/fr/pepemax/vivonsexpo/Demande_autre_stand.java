@@ -72,7 +72,7 @@ public class Demande_autre_stand extends AppCompatActivity {
                         JSONObject count = new JSONObject(responseStr);
 
                         if(new Integer(count.getString("COUNT(login)")) >= 3 ) {
-                            Log.d("Test", "Plus de 3");
+
                             buttonEnvoyerDemande.setClickable(false);
                             buttonEnvoyerDemande.setBackgroundColor(Color.RED);
                         }
@@ -108,7 +108,9 @@ public class Demande_autre_stand extends AppCompatActivity {
         Call call = client.newCall(request);
 
         call.enqueue(new Callback() {
+
             public  void onResponse(Call call, Response response) throws IOException {
+
                 responseStr = response.body().string();
 
                 if (new Integer(responseStr) == 1){

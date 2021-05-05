@@ -92,7 +92,7 @@
         android:layout_height="25dp"
         android:layout_marginLeft="10px"
         android:layout_marginTop="10dp"
-        android:text="Numéro Secteur"
+        android:text="Numéro Stand"
         android:textSize="15dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/titleNumT"

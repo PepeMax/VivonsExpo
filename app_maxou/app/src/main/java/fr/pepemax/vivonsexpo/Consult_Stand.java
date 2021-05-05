@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -49,7 +48,6 @@ public class Consult_Stand extends AppCompatActivity {
                 demandeAutreStand();
             }
         });
-
     }
 
     public void getInfosStand() throws IOException {
@@ -58,7 +56,6 @@ public class Consult_Stand extends AppCompatActivity {
         final TextView code_Alle = findViewById(R.id.textCodeA);
         final TextView num_Travee = findViewById(R.id.textNumT);
         final TextView num_Secteur = findViewById(R.id.textNumS);
-
 
         RequestBody formBody = new FormBody.Builder()
                 .add("login", login)
@@ -73,20 +70,17 @@ public class Consult_Stand extends AppCompatActivity {
 
         call.enqueue(new Callback() {
             public  void onResponse(Call call, Response response) throws IOException {
+
                 responseStr = response.body().string();
 
                 if (responseStr.compareTo("false")!=0){
 
-                    Log.d("TEST", responseStr);
-
                     try {
-//                        JSONObject stand = new JSONObject(responseStr);
-                        JSONObject stand =  new JSONObject("{\"numh\":\"1\",\"codea\":\"2\",\"numt\":\"5\",\"nums\":\"A\"}");
-
-                        num_Hall.setText(stand.getString("numh"));
-                        code_Alle.setText(stand.getString("codea"));
-                        num_Travee.setText(stand.getString("numt"));
-                        num_Secteur.setText(stand.getString("nums"));
+                        JSONObject stand = new JSONObject(responseStr);
+                        num_Hall.setText(stand.getString("NUMH"));
+                        code_Alle.setText(stand.getString("CODEA"));
+                        num_Travee.setText(stand.getString("NUMT"));
+                        num_Secteur.setText(stand.getString("NUMS"));
 
                     }
                     catch(JSONException e){
