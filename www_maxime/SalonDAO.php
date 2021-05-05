@@ -1,5 +1,7 @@
 <?php
 
+include("UserDAO.php");
+
 class SalonDAO
 {
 
@@ -18,15 +20,19 @@ class SalonDAO
     }
 
     public static function getStand($login) {
+
+        $classe = new UserDAO();
+        $codeExpo = $classe->getCodeExpo($login);
+
         try {
-            $sql = "SELECT NUMH, CODEA, NUMT, NUMS FROM STAND WHERE LOGIN = :login";
+            $sql = "SELECT NUMH, CODEA, NUMT, NUMS FROM STAND WHERE CODEE = :codee";
             $requetePrepa = DBConnex::getInstance()->prepare($sql);
-            $requetePrepa->bindParam("login", $login);
+            $requetePrepa->bindParam("codee", $codeExpo);
 
             $requetePrepa->execute();
-            $response = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+            $response = $requetePrepa->fetch(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            $response = "";
+            $response = $e;
         }
         return $response;
     }
