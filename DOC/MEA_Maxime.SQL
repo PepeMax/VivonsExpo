@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 05 mai 2021 à 09:14
+-- Généré le : mer. 05 mai 2021 à 15:58
 -- Version du serveur :  5.7.32
 -- Version de PHP : 7.4.12
 
@@ -76,6 +76,13 @@ CREATE TABLE `EXPOSANT` (
   `ANNEEINSCRIPTION` year(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `EXPOSANT`
+--
+
+INSERT INTO `EXPOSANT` (`CODEE`, `LOGIN`, `CODES`, `NUMT`, `NUMS`, `CODEA`, `NUMH`, `NUMH_1`, `RAISONSOCIALE`, `ACTIVITE`, `NOM`, `PRENOM`, `TELEPHONE`, `MAIL`, `ANNEEINSCRIPTION`) VALUES
+(1, 'fdenost', 'AU', NULL, NULL, NULL, NULL, NULL, 'SARL', 'Automobile', 'Denost', 'Franck', '0123456789', 'denost-auto@denost.fr', 2021);
+
 -- --------------------------------------------------------
 
 --
@@ -93,8 +100,7 @@ CREATE TABLE `HALL` (
 INSERT INTO `HALL` (`NUMH`) VALUES
 ('1'),
 ('2'),
-('3'),
-('4');
+('3');
 
 -- --------------------------------------------------------
 
@@ -153,6 +159,13 @@ CREATE TABLE `STAND` (
   `CODEE` int(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `STAND`
+--
+
+INSERT INTO `STAND` (`NUMH_1`, `NUMH`, `CODEA`, `NUMT`, `NUMS`, `CODEE`) VALUES
+('1', '1', 'A', 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -164,6 +177,22 @@ CREATE TABLE `TRAVEE` (
   `NUMT` int(2) NOT NULL,
   `CODES` varchar(2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `TRAVEE`
+--
+
+INSERT INTO `TRAVEE` (`NUMH`, `NUMT`, `CODES`) VALUES
+('2', 12, 'A'),
+('1', 1, 'AU'),
+('1', 2, 'AU'),
+('1', 3, 'AU'),
+('2', 8, 'CH'),
+('2', 9, 'CI'),
+('2', 10, 'DE'),
+('2', 11, 'H'),
+('1', 4, 'RL'),
+('1', 5, 'RL');
 
 -- --------------------------------------------------------
 
@@ -199,6 +228,14 @@ CREATE TABLE `USER` (
   `MDP` varchar(32) NOT NULL,
   `STATUT` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `USER`
+--
+
+INSERT INTO `USER` (`LOGIN`, `MDP`, `STATUT`) VALUES
+('fdenost', '4a7d1ed414474e4033ac29ccb8653d9b', 'exposant'),
+('mdenost', '3d1056876548abce31cceb4cd3d5c1e6', 'exposant');
 
 --
 -- Index pour les tables déchargées
@@ -284,7 +321,7 @@ ALTER TABLE `DEMANDE`
 -- AUTO_INCREMENT pour la table `EXPOSANT`
 --
 ALTER TABLE `EXPOSANT`
-  MODIFY `CODEE` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `CODEE` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Contraintes pour les tables déchargées
