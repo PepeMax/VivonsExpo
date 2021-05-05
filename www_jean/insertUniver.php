@@ -7,4 +7,4 @@ include_once 'universDAO.php';
 // $_POST["libelleU"] = 'Univer Test';
 // $_POST["numH"] = '4';
 
-print(json_encode(universDAO::ajoutUnivers($_POST["codeU"],$_POST["libelleU"],$_POST["numH"])));
+print(json_encode(universDAO::ajoutUnivers($_POST["codeU"],$_POST["libelleU"],null)));

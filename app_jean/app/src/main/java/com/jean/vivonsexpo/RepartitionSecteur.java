@@ -21,8 +21,10 @@ import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RepartitionSecteur extends AppCompatActivity {
@@ -69,14 +71,21 @@ public class RepartitionSecteur extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        getSecteurs();
     }
 
     private void getSecteurs(){
         OkHttpClient client = new OkHttpClient();
         ArrayList<String> arrayListSecteurNbExposant = new ArrayList<>();
 
+        RequestBody formBody = new FormBody.Builder()
+                .add("codeU",codeU)
+                .build();
+
         Request request = new Request.Builder()
-                .url("http://"+Param.ip+"/vivonsexpo/getNbExpUniver.php")
+                .url("http://"+Param.ip+"/vivonsexpo/getNbExpSecteur.php")
+                .post(formBody)
                 .build();
 
         Call call = client.newCall(request);
@@ -97,15 +106,15 @@ public class RepartitionSecteur extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-//                Log.d("Test", arrayListUniNbExposant.toString());
-                ListView listViewUnivers = findViewById(R.id.listViewRepUnivers);
+                Log.d("Test", arrayListSecteurNbExposant.toString());
+                ListView listViewRepSecteur = findViewById(R.id.listViewRepSecteur);
 
                 ArrayAdapter<String> arrayAdapterUnivers = new ArrayAdapter<>(RepartitionSecteur.this, android.R.layout.simple_list_item_1, arrayListSecteurNbExposant);
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listViewUnivers.setAdapter(arrayAdapterUnivers);
+                        listViewRepSecteur.setAdapter(arrayAdapterUnivers);
                     }
                 });
             }

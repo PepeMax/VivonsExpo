@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SetSecteur">
+
+    <TextView
+        android:id="@+id/TextParamSecteur"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Parametrer le secteur "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/textViewTravee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Travee : "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextParamSecteur"/>
+
+    <Spinner
+        android:id="@+id/spinnerTravee"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Numero de Travee"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTravee"/>
+
+    <TextView
+        android:id="@+id/textViewAllee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Allee : "
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerTravee"/>
+
+    <Spinner
+        android:id="@+id/spinnerAllee"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:hint="Numero d'allee"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAllee"/>
+
+    <Button
+        android:id="@+id/buttonParamSecteur"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Parametrer Hall"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerAllee"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <Button
+        android:id="@+id/buttonQuitterParamSecteur"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Quitter"
+        android:textSize="18dp"
+        android:textAllCaps="false"
+        app:layout_constraintTop_toBottomOf="@+id/buttonParamSecteur"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
