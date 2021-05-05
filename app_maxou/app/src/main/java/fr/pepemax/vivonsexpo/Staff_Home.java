@@ -65,7 +65,6 @@ public class Staff_Home extends AppCompatActivity {
         });
     }
 
-
     public void authentification() throws IOException {
         final EditText textLogin = findViewById(R.id.editTextLogin);
         final EditText textMdp = findViewById(R.id.editTextMdp);
@@ -80,29 +79,19 @@ public class Staff_Home extends AppCompatActivity {
                 .post(formBody)
                 .build();
 
-        Log.d("Test", textLogin.getText().toString() + " " + textMdp.getText().toString() );
-
         Call call = client.newCall(request);
 
         call.enqueue(new Callback() {
             public  void onResponse(Call call, Response response) throws IOException {
                 responseStr = response.body().string();
-                Log.d("test", responseStr);
-
 
                 if (responseStr.compareTo("false")!=0){
-
-                    Log.d("test", responseStr);
-
 
                     try {
                         JSONObject user = new JSONObject(responseStr);
 
                         if(user.getString("statut").compareTo("staff")==0) {
                             Log.d("Test", "Staff");
-//                            Intent intent = new Intent(MainActivity.this, MenuEtudiantActivity.class);
-//                            intent.putExtra("etudiant", etudiant.toString());
-//                            startActivity(intent);
                         }
                         else if (user.getString("statut").compareTo("exposant")==0){
                             Log.d("Test", "Exposant");
@@ -113,7 +102,6 @@ public class Staff_Home extends AppCompatActivity {
                     }
                     catch(JSONException e){
                         Log.d("TAG", e.toString());
-                        // Toast.makeText(MainActivity.this, "Erreur de connexion !!!! !", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Log.d("Test","Login ou mot de  passe non valide !");
@@ -124,7 +112,6 @@ public class Staff_Home extends AppCompatActivity {
             {
                 Log.d("Test","erreur!!! connexion impossible");
             }
-
         });
     }
 }

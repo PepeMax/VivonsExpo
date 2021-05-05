@@ -51,13 +51,10 @@ public class Staff_Create_Account extends AppCompatActivity {
         buttonEnvoyerExposant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Appel de la function authentification
                 registerExposant();
             }
         });
     }
-
-
 
     private void selectHall() throws IOException {
         OkHttpClient client = new OkHttpClient();
@@ -72,20 +69,21 @@ public class Staff_Create_Account extends AppCompatActivity {
             @Override
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String responseStr = response.body().string();
-                //Log.d("Test",responseStr);
+
                 JSONArray jsonArraySalon = null;
+
                 try {
                     jsonArraySalon = new JSONArray(responseStr);
 
                     for (int i = 0; i < jsonArraySalon.length(); i++) {
                         JSONObject jsonSalon = null;
                         jsonSalon = jsonArraySalon.getJSONObject(i);
-                        arrayListNomSalon.add(jsonSalon.getString("codes") + " - " + jsonSalon.getString("libelles"));
+                        arrayListNomSalon.add(jsonSalon.getString("CODES") + " - " + jsonSalon.getString("LIBELLES"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.d("Test", arrayListNomSalon.toString());
+
                 Spinner spinnerSalon = findViewById(R.id.spinnerSalon);
 
                 ArrayAdapter<String> arrayAdapterHalls = new ArrayAdapter<String>(Staff_Create_Account.this, android.R.layout.simple_spinner_item, arrayListNomSalon);
@@ -100,10 +98,8 @@ public class Staff_Create_Account extends AppCompatActivity {
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Log.d("Test", "erreur!!! connexion impossible");
+                Log.d("TAG", e.toString());
             }
-
-
         });
     }
 
@@ -123,11 +119,6 @@ public class Staff_Create_Account extends AppCompatActivity {
         RequestBody formBody = new FormBody.Builder()
                 .add("login", textLogin.getText().toString())
                 .add("codes", Secteur_Salon.getSelectedItem().toString().substring(0, 2))
-                .add("numt", "")
-                .add("nums", "")
-                .add("codea", "")
-                .add("numh","")
-                .add("numh_1","")
                 .add("raison_sociale", RaisonSociale.getText().toString())
                 .add("activite", Activite_Ent.getText().toString())
                 .add("nom", Nom.getText().toString())

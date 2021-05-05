@@ -24,7 +24,7 @@ public class Accueil extends AppCompatActivity {
 
                 Log.d("DEBUG : ", "Staff: ");
 //                try {
-//                    Intent intent = new Intent(MainActivity.this, MenuEtudiantActivity.class);
+//                    Intent intent = new Intent(Accueil.this, MenuEtudiantActivity.class);
 //                    startActivity(intent);
 //                }catch (IOException e) {
 //                    e.printStackTrace();
@@ -48,7 +48,7 @@ public class Accueil extends AppCompatActivity {
 
                 Log.d("DEBUG : ", "Visiteur: ");
 //                try {
-//                    Intent intent = new Intent(MainActivity.this, MenuEtudiantActivity.class);
+//                    Intent intent = new Intent(Accueil.this, MenuEtudiantActivity.class);
 //                    startActivity(intent);
 //                }catch (IOException e) {
 //                    e.printStackTrace();
