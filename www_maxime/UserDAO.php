@@ -19,7 +19,7 @@ class UserDAO
         return $reponse;
     }
 
-    public static function registerExposant($login, $codes, $numt, $nums, $codea, $numh, $numh_1, $raison_sociale, $activite, $nom, $prenom, $tel, $mail, $mdp)
+    public static function registerExposant($login, $codes, $raison_sociale, $activite, $nom, $prenom, $tel, $mail, $mdp)
     {
         try {
             $response = "";
@@ -36,7 +36,7 @@ class UserDAO
             $requete_1_Prepa->rowCount();
 
             if ($requete_1_Prepa == 1) {
-                $sql2 = "INSERT INTO EXPOSANT (LOGIN, CODES, NUMT, NUMS, CODEA, NUMH, NUMH_1, RAISONSOCIALE, ACTIVITE, NOM, PRENOM, TELEPHONE, MAIL, ANNEEINSCRIPTION) VALUES (:login, :codes, NULL, NULL, NULL, NULL, NULL, :raison_sociale, :activite, :nom, :prenom, :tel, :mail, :annee_inscription); ";
+                $sql2 = "INSERT INTO EXPOSANT (LOGIN, CODES, RAISONSOCIALE, ACTIVITE, NOM, PRENOM, TELEPHONE, MAIL, ANNEEINSCRIPTION) VALUES (:login, :codes, :raison_sociale, :activite, :nom, :prenom, :tel, :mail, :annee_inscription); ";
 
                 $requete_2_Prepa = DBConnex::getInstance()->prepare($sql2);
 
@@ -72,7 +72,7 @@ class UserDAO
     public static function getNbDemannde($login)
     {
         try {
-            $sql = "SELECT COUNT(login) FROM DEMANDE where login= :login";
+            $sql = "SELECT COUNT(login) FROM DEMANDE WHERE login= :login";
             $requetePrepa = DBConnex::getInstance()->prepare($sql);
             $requetePrepa->bindParam("login", $login);
 
@@ -82,6 +82,22 @@ class UserDAO
             $reponse = "";
         }
         return $reponse;
+    }
+
+    public static function getCodeExpo($login)
+    {
+        try {
+            $sql = "SELECT CODEE FROM EXPOSANT WHERE login= :login";
+            $requetePrepa = DBConnex::getInstance()->prepare($sql);
+            $requetePrepa->bindParam("login", $login);
+
+            $requetePrepa->execute();
+            $reponse = $requetePrepa->fetch();
+        } catch (Exception $e) {
+            $reponse = "";
+        }
+        return $reponse['CODEE'];
+
     }
 
 
