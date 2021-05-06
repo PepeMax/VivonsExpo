@@ -31,6 +31,7 @@
         android:layout_height="wrap_content"
         android:text="Parametrer Hall"
         android:textSize="18dp"
+        android:enabled="false"
         android:textAllCaps="false"
         app:layout_constraintTop_toBottomOf="@+id/listViewRepSecteur"
         app:layout_constraintLeft_toLeftOf="parent"

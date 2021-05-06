@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -30,6 +31,7 @@ import okhttp3.Response;
 public class RepartitionSecteur extends AppCompatActivity {
     private String codeU;
     private String libelleU;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,7 @@ public class RepartitionSecteur extends AppCompatActivity {
         });
 
         getSecteurs();
+        testHall();
     }
 
     private void getSecteurs(){
@@ -117,11 +120,60 @@ public class RepartitionSecteur extends AppCompatActivity {
                         listViewRepSecteur.setAdapter(arrayAdapterUnivers);
                     }
                 });
+
+                listViewRepSecteur.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Object unUnivers = parent.getItemAtPosition(position);
+
+                        Intent intent = new Intent(RepartitionSecteur.this,SetSecteur.class);
+                        intent.putExtra("codeS",unUnivers.toString());
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 Log.d("Test", "erreur!!! connexion impossible");
+            }
+        });
+    }
+
+    private void testHall(){
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody formBody = new FormBody.Builder()
+                .add("codeU",codeU)
+                .build();
+
+        Request request = new Request.Builder()
+                .url("http://"+Param.ip+"/vivonsexpo/testHallUnivers.php")
+                .post(formBody)
+                .build();
+
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                String responseStr = response.body().string();
+                Log.d("Test",responseStr);
+                try{
+                    JSONObject json= new JSONObject(responseStr);
+                    if(json.getString("numH").compareTo("null") == 0){
+                        Intent intent = new Intent(RepartitionSecteur.this,SetHallUniver.class);
+                        intent.putExtra("codeU", codeU);
+                        intent.putExtra("libelleU", libelleU);
+                        startActivity(intent);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                Log.d("Test","erreur!!! connexion impossible");
             }
         });
     }

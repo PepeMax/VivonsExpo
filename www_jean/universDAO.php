@@ -67,4 +67,17 @@ class universDAO{
 		}
 		return $reponse;
 	}
+
+	public static function testHallUnivers($codeU){
+		try{
+			$sql = "select numH from univers where codeu = :codeU";
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+			$requetePrepa->bindParam("codeU",$codeU);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->fetch(PDO::FETCH_ASSOC);
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
 }
