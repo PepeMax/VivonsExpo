@@ -70,4 +70,21 @@ class secteursDAO{
 		}
 		return $reponse;
 	}
+
+	public static function getTraveeSecteur($codeS){
+		try{
+			$sql = "select numt from travee
+					where codes is null
+					and numh = (select numH from univers
+								join secteur on univers.codeu = secteur.codeu
+								where codes = :codeS);";
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+            $requetePrepa->bindParam("codeS",$codeS);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->fetchAll(PDO::FETCH_ASSOC);
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
 }
