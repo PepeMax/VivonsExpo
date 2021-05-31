@@ -87,4 +87,21 @@ class secteursDAO{
 		}
 		return $reponse;
 	}
+
+	public static function setTraveeSecteur($arrayNumT,$codeS){
+		try{
+            $sql = "update travee set codeS = :codeS where numT in (:numT);" ;
+			$requetePrepa = DBConnex::getInstance()->prepare($sql);
+			$arrayT = implode(',',  $arrayNumT);
+			var_dump($arrayT);
+			var_dump($arrayNumT);
+            $requetePrepa->bindParam("codeS",$codeS);
+            $requetePrepa->bindParam("numT",$arrayT);
+			$requetePrepa->execute();
+			$reponse = $requetePrepa->rowCount();
+		}catch(Exception $e){
+			$reponse = "";
+		}
+		return $reponse;
+	}
 }

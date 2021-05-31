@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ public class SetSecteur extends AppCompatActivity {
     private String codeS;
     private String libelleS;
     private ArrayList<CheckBox> arrayListCheckBoxTravee = new ArrayList<>();
+    private ArrayList<String> checkedNumT = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +43,14 @@ public class SetSecteur extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        final Button buttonValidSecteur = findViewById(R.id.buttonValidSecteur);
+        buttonValidSecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                insertTravee();
             }
         });
 
@@ -105,6 +115,16 @@ public class SetSecteur extends AppCompatActivity {
                             ch.setText(uneTravee);
                             ll.addView(ch);
                             arrayListCheckBoxTravee.add(ch);
+                            ch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                                @Override
+                                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                    if(isChecked){
+                                        checkedNumT.add(ch.getText().toString().substring(7));
+                                    }else{
+                                        checkedNumT.remove(ch.getText().toString().substring(7));
+                                    }
+                                }
+                            });
                         }
                     }
                 });
@@ -117,5 +137,9 @@ public class SetSecteur extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void insertTravee(){
+        Log.d("Test",checkedNumT.toString());
     }
 }
